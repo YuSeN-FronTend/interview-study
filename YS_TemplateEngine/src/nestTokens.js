@@ -9,7 +9,6 @@ export default function nestTokens(tokens) {
     // 收集器, 天生指向nestedTokens结果数组，引用类型值，所以指向的是同一个数组
     // 收集器的指向会变化，当遇见#的时候，收集器会指向这个token的下标为2的新数组
     var collector = nestedTokens
-    console.log(tokens);
 
     for(let i = 0; i < tokens.length; i++) {
         let token = tokens[i];
@@ -25,7 +24,7 @@ export default function nestTokens(tokens) {
                 break;
             case '/':
                 // 出栈 pop()会返回刚刚弹出的顶
-                let section_pop = sections.pop();
+                sections.pop();
                 // 改变收集器为栈队尾（队尾是栈顶）那项的下标为2的数组
                 collector = sections.length > 0 ? sections[sections.length - 1][2] : nestedTokens;
                 break;

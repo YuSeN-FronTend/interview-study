@@ -7,31 +7,51 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>index.html</h1>
+    <div id="container"></div>
     <script src="/xuni/bundle.js"></script>
 
     <script>
         // 模板字符串
         var templateStr = `
-         <ul>
-                {{#arr}}
+        <div>
+            <ul>
+                {{#students}}
                     <li>
-                        {{name}}的爱好是:
+                        学生{{name}}的爱好是:
                         <ol>
                             {{#hobbies}}
                                 <li>{{.}}</li>
                             {{/hobbies}}
                             </ol>
                     </li>
-                {{/arr}}
-                </ul>
+                {{/students}}
+            </ul>
+        </div>
         `
 
         // 数据
-        var data = {};
-
+        var data = {
+            students: [
+                { 'name': '小明', 'hobbies': ['游戏', '健身']},
+                { 'name': '小红', 'hobbies': ['足球', '篮球', '羽毛球']},
+                { 'name': '小强', 'hobbies': ['吃饭', '睡觉'] },
+            ]
+        };
+        // var templateStr = '我爱{{somebody}}, {{somebody}}也爱我,我考了{{a.b.c}}分'
+        // var data = {
+        //     somebody:'大妹',
+        //     a:{
+        //         b: {
+        //             c:100
+        //         }
+        //     }
+        // }
         // 调用render
-        YS_TemplateEngine.render(templateStr, data)
+        var domStr = YS_TemplateEngine.render(templateStr, data)
+
+        // 渲染上树
+        var container = document.getElementById('container')
+        container.innerHTML = domStr
     </script>
 </body>
 </html>
